@@ -3,7 +3,7 @@
   "displayName": "AVIF Convertor",
   "description": "Right-click files/folders to convert PNG/JPEG/GIF/APNG to AVIF using avifenc.",
   "version": "0.0.1",
-  "publisher": "jackPanyj",
+  "publisher": "panyanjie",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
