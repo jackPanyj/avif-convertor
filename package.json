@@ -11,9 +11,10 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:avifConvert.convert"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jackPanyj/avif-convertor"
+  },
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
