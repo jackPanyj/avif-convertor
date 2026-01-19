@@ -1,0 +1,104 @@
+{
+  "name": "avif-convertor",
+  "displayName": "AVIF Convertor",
+  "description": "Right-click files/folders to convert PNG/JPEG/GIF/APNG to AVIF using avifenc.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:avifConvert.convert"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "avifConvert.convert",
+        "title": "Convert to AVIF",
+        "category": "AVIF"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "avifConvert.convert",
+          "when": "explorerResourceIsFolder || resourceExtname == '.png' || resourceExtname == '.jpg' || resourceExtname == '.jpeg' || resourceExtname == '.gif' || resourceExtname == '.apng'",
+          "group": "navigation@1"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "avifConvert.convert",
+          "when": "resourceExtname == '.png' || resourceExtname == '.jpg' || resourceExtname == '.jpeg' || resourceExtname == '.gif' || resourceExtname == '.apng'",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AVIF Convertor",
+      "properties": {
+        "avifConvert.crf": {
+          "type": "number",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 63,
+          "description": "Quality value (0-63). Lower is higher quality."
+        },
+        "avifConvert.speed": {
+          "type": "number",
+          "default": 6,
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Encoding speed (0-10). Higher is faster but lower quality."
+        },
+        "avifConvert.lossless": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable lossless mode."
+        },
+        "avifConvert.recursive": {
+          "type": "boolean",
+          "default": true,
+          "description": "Recurse into subdirectories when converting a folder."
+        },
+        "avifConvert.outDir": {
+          "type": "string",
+          "default": "",
+          "description": "Write outputs to a directory instead of next to inputs. If set and a folder is converted, relative paths are preserved."
+        },
+        "avifConvert.overwrite": {
+          "type": "boolean",
+          "default": false,
+          "description": "Overwrite existing .avif files."
+        },
+        "avifConvert.jobs": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Pass -j/--jobs to avifenc. 0 means do not pass."
+        },
+        "avifConvert.autoInstallOnMac": {
+          "type": "boolean",
+          "default": true,
+          "description": "On macOS, offer to install avifenc via Homebrew (brew install libavif) when missing."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "npx tsc -p .",
+    "watch": "npx tsc -watch -p .",
+    "package": "npx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.7.3",
+    "@vscode/vsce": "^3.7.1"
+  }
+}
